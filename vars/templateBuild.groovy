@@ -1,4 +1,4 @@
-def call(label, cc_env, env) {
+def call(String label, String cc_env, String env) {
     pipeline {
         agent any
         environment {
