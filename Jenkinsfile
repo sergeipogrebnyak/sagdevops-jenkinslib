@@ -1,4 +1,4 @@
 templateBuild {
-    cc_env: 'cc'
-    env: 'test'
+    cc_env = 'cc'
+    env = 'test'
 }
