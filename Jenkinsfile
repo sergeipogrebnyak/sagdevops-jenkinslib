@@ -1,4 +1,1 @@
-bootstrap {
-    node: 'osx'
-    bootstrap: 'snapshot'
-}
+templateBuild()
