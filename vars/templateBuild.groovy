@@ -3,18 +3,14 @@ def call(cc_env = 'cc-docker', env = 'docker') {
         environment {
             CC_ENV = cc_env
         }
-        steps {
-            echo "Provisioning Command Central using $CC_ENV environment configuration"
-        }
+        echo "Provisioning Command Central using $CC_ENV environment configuration"
     }        
     stage("Provision Environment") {
         environment {
             CC_ENV = env
             TEST_SUITE = '**/AcceptanceTestSuite.class'
         }
-        steps {
-            echo "Provisioning environment $CC_ENV"
-        }
+        echo "Provisioning environment $CC_ENV"
         // post {
         //     always {
         //         junit "**/$CC_ENV/TEST-*.xml"
