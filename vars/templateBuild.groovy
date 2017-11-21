@@ -7,7 +7,7 @@ def call(label = 'docker', cc_env = 'cc-docker', env = 'docker') {
         stages {
             stage("Provision CC") {
                 environment {
-                    CC_ENV = cc_env
+                    CC_ENV = "$cc_env"
                 }
                 steps {
                     timeout(time:30, unit:'MINUTES') {
@@ -19,7 +19,7 @@ def call(label = 'docker', cc_env = 'cc-docker', env = 'docker') {
             }        
             stage("Provision GA") {
                 environment {
-                    CC_ENV = 'docker'
+                    CC_ENV = "$env"
                     TEST_SUITE = '**/AcceptanceTestSuite.class'
                 }
                 steps {
