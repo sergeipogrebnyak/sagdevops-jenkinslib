@@ -1,4 +1,4 @@
-def call(label = 'docker', cc_env = 'cc-docker', env = 'docker') {
+def call(label, cc_env, env) {
     pipeline {
         agent any
         environment {
