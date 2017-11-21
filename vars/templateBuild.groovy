@@ -1,4 +1,4 @@
-call(cc_env = 'cc-docker', env = 'docker') {
+def call(cc_env = 'cc-docker', env = 'docker') {
     stage("Provision Command Central") {
         environment {
             CC_ENV = cc_env
