@@ -7,7 +7,7 @@ def call(label = 'docker', cc_env = 'cc-docker', env = 'docker') {
         stages {
             stage("Provision CC") {
                 environment {
-                    CC_ENV = 'cc-docker'
+                    CC_ENV = cc_env
                 }
                 steps {
                     timeout(time:30, unit:'MINUTES') {
