@@ -1,4 +1,5 @@
 bootstrap {
     node: 'osx'
-    bootstrap: 'snapshot'  
+    bootstrap: 'snapshot'
+    branch: 'release/101oct2017'
 }
