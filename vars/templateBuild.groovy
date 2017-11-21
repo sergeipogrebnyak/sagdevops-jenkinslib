@@ -1,8 +1,6 @@
 def call(label = 'docker', cc_env = 'cc-docker', env = 'docker') {
     pipeline {
-        agent {
-            label 'docker'
-        }
+        agent any
         environment {
             SAG_AQUARIUS='aquarius-bg.eur.ad.sag'
         }
