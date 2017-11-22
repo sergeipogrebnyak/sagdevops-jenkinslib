@@ -6,7 +6,7 @@ def call(body) {
     body()
 
     def cc_env = config.cc_env
-    def env = config.env
+    def main_env = config.env
     def label = config.label
     def aquarius = config.aquarius
 
@@ -22,7 +22,7 @@ def call(body) {
                 }
                 steps {
                     timeout(time:30, unit:'MINUTES') {
-                        echo "$CC_ENV"
+                        echo "$env.CC_ENV"
                         //sh 'docker-compose run --rm init'
                         //sh 'docker-compose port cc 8091'
                     }
@@ -30,13 +30,13 @@ def call(body) {
             }        
             stage("Provision GA") {
                 environment {
-                    CC_ENV = "$env"
+                    CC_ENV = "$main_env"
                     TEST_SUITE = '**/AcceptanceTestSuite.class'
                 }
                 steps {
                     timeout(time:90, unit:'MINUTES') {
                         //sh "docker-compose run --rm test"
-                        echo "$CC_ENV"
+                        echo "$env.CC_ENV"
                     }
                 }
                 // post {
