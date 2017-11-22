@@ -13,7 +13,7 @@ def call(body) {
     pipeline {
         agent any
         environment {
-            SAG_AQUARIUS='aquarius-bg.eur.ad.sag'
+            SAG_AQUARIUS="$aquarius"
         }
         stages {
             stage("Provision CC") {
@@ -22,29 +22,24 @@ def call(body) {
                 }
                 steps {
                     timeout(time:30, unit:'MINUTES') {
-                        echo "$env.CC_ENV"
-                        //sh 'docker-compose run --rm init'
-                        //sh 'docker-compose port cc 8091'
+                        echo "Provisioning CC for $env.CC_ENV"
+                        sh 'docker-compose run --rm init'
+                        sh 'docker-compose port cc 8091'
                     }
                 }
             }        
-            stage("Provision GA") {
-                environment {
-                    CC_ENV = "$main_env"
-                    TEST_SUITE = '**/AcceptanceTestSuite.class'
-                }
-                steps {
-                    timeout(time:90, unit:'MINUTES') {
-                        //sh "docker-compose run --rm test"
-                        echo "$env.CC_ENV"
-                    }
-                }
-                // post {
-                //     always {
-                //         junit "**/$CC_ENV/TEST-*.xml"
-                //     }
-                // }
-            }
+            // stage("Provision GA") {
+            //     environment {
+            //         CC_ENV = "$main_env"
+            //         TEST_SUITE = '**/AcceptanceTestSuite.class'
+            //     }
+            //     steps {
+            //         timeout(time:90, unit:'MINUTES') {
+            //             echo "Testing with $env.CC_ENV"
+            //             sh "docker-compose run --rm test"
+            //         }
+            //     }
+            // }
         }
     }
 }

@@ -1,4 +1,4 @@
-def call(command) {
+def call(String command) {
     if (isUnix()) {
         sh "./gradlew $command"
     } else {
