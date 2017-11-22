@@ -1,4 +1,15 @@
-def call(String label, String cc_env, String env) {
+def call(body) {
+    // evaluate the body block, and collect configuration into the object
+    def config = [:]
+    body.resolveStrategy = Closure.DELEGATE_FIRST
+    body.delegate = config
+    body()
+
+    def cc_env = config.cc_env
+    def env = config.env
+    def label = config.label
+    def aquarius = config.aquarius
+
     pipeline {
         agent any
         environment {
