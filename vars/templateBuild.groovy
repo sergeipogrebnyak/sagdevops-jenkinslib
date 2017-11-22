@@ -11,7 +11,6 @@ def call(body) {
     def aquarius = config.aquarius
 
     pipeline {
-        agent any
         environment {
             SAG_AQUARIUS="$aquarius"
         }
@@ -21,11 +20,13 @@ def call(body) {
                     CC_ENV = "$cc_env"
                 }
                 steps {
-                    timeout(time:30, unit:'MINUTES') {
-                        echo "Provisioning CC for $env.CC_ENV"
-                        //sh 'docker-compose run --rm init'
-                        sh 'docker-compose up -d cc'
-                        sh 'docker-compose port cc 8091'
+                    node(label) {
+                        timeout(time:30, unit:'MINUTES') {
+                            echo "Provisioning CC for $env.CC_ENV"
+                            //sh 'docker-compose run --rm init'
+                            sh 'docker-compose up -d cc'
+                            sh 'docker-compose port cc 8091'
+                        }
                     }
                 }
             }        
