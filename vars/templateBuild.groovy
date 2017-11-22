@@ -16,14 +16,15 @@ def call(body) {
             SAG_AQUARIUS="$aquarius"
         }
         stages {
-            stage("Provision CC") {
+            stage("Provision Command Central") {
                 environment {
                     CC_ENV = "$cc_env"
                 }
                 steps {
                     timeout(time:30, unit:'MINUTES') {
                         echo "Provisioning CC for $env.CC_ENV"
-                        sh 'docker-compose run --rm init'
+                        //sh 'docker-compose run --rm init'
+                        sh 'docker-compose up -d cc'
                         sh 'docker-compose port cc 8091'
                     }
                 }
